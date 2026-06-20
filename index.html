@@ -10,8 +10,7 @@
 body{font-family:'Nunito',sans-serif;background:#FFFBF5;color:#2C2C2A;scroll-behavior:smooth}
 nav{position:fixed;top:0;width:100%;background:rgba(255,251,245,0.96);backdrop-filter:blur(8px);z-index:200;border-bottom:1px solid #F0E8D8;padding:0 2rem}
 .nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:64px}
-.logo{font-size:22px;font-weight:900;color:#D85A30}
-.logo span{color:#1D9E75}
+.logo{font-size:22px;font-weight:900;color:#D85A30}.logo span{color:#1D9E75}
 .nav-links{display:flex;gap:1.5rem;list-style:none}
 .nav-links a{text-decoration:none;color:#5F5E5A;font-weight:700;font-size:14px;transition:color .2s}
 .nav-links a:hover{color:#D85A30}
@@ -26,6 +25,8 @@ section{padding:5rem 2rem}
 .btn-primary:hover{background:#993C1D;transform:translateY(-2px)}
 .btn-secondary{background:#fff;color:#1D9E75;padding:13px 26px;border-radius:50px;font-family:'Nunito',sans-serif;font-weight:700;font-size:15px;border:2px solid #1D9E75;cursor:pointer;transition:all .2s}
 .btn-secondary:hover{background:#E1F5EE}
+
+/* HERO */
 #home{background:linear-gradient(135deg,#FFF8EE 0%,#E1F5EE 100%);padding-top:8rem}
 .hero-inner{display:flex;align-items:center;gap:3rem}
 .hero-text{flex:1}
@@ -34,6 +35,8 @@ section{padding:5rem 2rem}
 .hero-text h1 span{color:#D85A30}
 .hero-text p{font-size:17px;color:#5F5E5A;line-height:1.7;margin-bottom:2rem;max-width:460px}
 .hero-btns{display:flex;gap:1rem;flex-wrap:wrap}
+
+/* PROFILE */
 #profile{background:#F7F4EF;padding:3rem 2rem}
 .profile-card{max-width:780px;margin:0 auto;background:#fff;border:1.5px solid #F0E8D8;border-radius:24px;padding:1.8rem 2rem;box-shadow:0 8px 40px rgba(0,0,0,.07);display:flex;align-items:center;gap:2rem}
 .profile-avatar{width:88px;height:88px;border-radius:50%;background:linear-gradient(135deg,#FAC775,#EF9F27);border:4px solid #fff;box-shadow:0 4px 16px rgba(0,0,0,.1);display:flex;align-items:center;justify-content:center;font-size:40px;flex-shrink:0}
@@ -53,52 +56,29 @@ section{padding:5rem 2rem}
 .post-thumb.p4{background:linear-gradient(135deg,#B5D4F4,#378ADD)}
 .post-thumb.p5{background:linear-gradient(135deg,#CED0F6,#7F77DD)}
 .post-thumb.p6{background:linear-gradient(135deg,#FAC775,#D85A30)}
-#features{background:#fff}
-.features-row{display:flex;gap:12px;justify-content:center;align-items:center;flex-wrap:wrap;margin-top:2.5rem;padding:1rem 0}
-.feat-item{position:relative;display:flex;flex-direction:column;align-items:center;cursor:pointer}
-.feat-icon-wrap{width:64px;height:64px;border-radius:20px;display:flex;align-items:center;justify-content:center;font-size:28px;transition:transform .2s}
-.feat-item:hover .feat-icon-wrap{transform:translateY(-6px) scale(1.12)}
+
+/* FEATURES HOVER */
+#features{background:#fff;overflow:visible}
+.features-row{display:flex;gap:0;justify-content:center;align-items:center;flex-wrap:nowrap;margin-top:2.5rem;padding:2rem 0 1rem;border:1.5px solid #F0E8D8;border-radius:24px;background:#FFFBF5}
+.feat-item{position:relative;display:flex;flex-direction:column;align-items:center;cursor:pointer;padding:0 2rem}
+.feat-icon-wrap{width:72px;height:72px;border-radius:22px;display:flex;align-items:center;justify-content:center;font-size:32px;transition:transform .25s cubic-bezier(.34,1.56,.64,1)}
+.feat-item:hover .feat-icon-wrap{transform:translateY(-8px) scale(1.15)}
 .feat-icon-wrap.orange{background:#FAECE7}
 .feat-icon-wrap.green{background:#E1F5EE}
 .feat-icon-wrap.amber{background:#FAEEDA}
 .feat-icon-wrap.pink{background:#FBEAF0}
 .feat-icon-wrap.blue{background:#E6F1FB}
 .feat-icon-wrap.purple{background:#EEEDFE}
-.feat-label{font-size:11px;font-weight:700;color:#888780;margin-top:8px;text-align:center;white-space:nowrap}
-.feat-popup{position:absolute;bottom:calc(100% + 12px);left:50%;transform:translateX(-50%) scale(0.85);background:#2C2C2A;color:#fff;border-radius:14px;padding:.8rem 1rem;width:180px;pointer-events:none;opacity:0;transition:opacity .2s,transform .2s;z-index:100;text-align:left}
-.feat-popup::after{content:'';position:absolute;top:100%;left:50%;transform:translateX(-50%);border:6px solid transparent;border-top-color:#2C2C2A}
-.feat-item:hover .feat-popup{opacity:1;transform:translateX(-50%) scale(1)}
-.feat-popup strong{display:block;font-size:13px;font-weight:800;margin-bottom:4px;color:#fff}
-.feat-popup p{font-size:11px;color:rgba(255,255,255,.75);line-height:1.5;margin-bottom:6px}
-.feat-popup span{font-size:10px;font-weight:700;background:#D85A30;color:#fff;padding:3px 8px;border-radius:50px;display:inline-block}
-.feat-divider{width:1px;height:40px;background:#F0E8D8;flex-shrink:0}
-.live-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.2rem;margin-top:2rem}
-.live-card{background:#fff;border:1.5px solid #F0E8D8;border-radius:20px;overflow:hidden;transition:transform .2s;cursor:pointer;display:flex;flex-direction:column}
-.live-card:hover{transform:translateY(-4px)}
-.live-banner{height:140px;display:flex;align-items:center;justify-content:center;font-size:40px;position:relative;overflow:hidden}
-.live-banner img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
-.live-banner-emoji{position:relative;z-index:1;font-size:40px}
-.live-banner.b1{background:linear-gradient(135deg,#FAEEDA,#FAC775)}
-.live-banner.b2{background:linear-gradient(135deg,#E1F5EE,#9FE1CB)}
-.live-banner.b3{background:linear-gradient(135deg,#EEEDFE,#AFA9EC)}
-.live-banner.b4{background:linear-gradient(135deg,#FAECE7,#F0997B)}
-.live-banner.b5{background:linear-gradient(135deg,#E6F1FB,#B5D4F4)}
-.live-banner.b6{background:linear-gradient(135deg,#FBEAF0,#F4C0D1)}
-.live-src{position:absolute;bottom:8px;right:10px;background:rgba(255,255,255,.85);border-radius:8px;padding:2px 8px;font-size:10px;font-weight:700;color:#5F5E5A}
-.live-body{padding:1rem 1.2rem;display:flex;flex-direction:column;flex:1}
-.live-body h4{font-size:14px;font-weight:800;color:#2C2C2A;margin-bottom:4px;line-height:1.4}
-.live-body p{font-size:12px;color:#5F5E5A;line-height:1.5;margin-bottom:.7rem;flex:1}
-.live-btn{width:100%;border:none;padding:8px;border-radius:10px;font-family:'Nunito',sans-serif;font-weight:700;font-size:12px;cursor:pointer;transition:background .2s;margin-top:auto}
-.live-btn.orange{background:#FAECE7;color:#993C1D}
-.live-btn.orange:hover{background:#F5C4B3}
-.live-btn.green{background:#E1F5EE;color:#0F6E56}
-.live-btn.green:hover{background:#9FE1CB}
-.live-btn.amber{background:#FAEEDA;color:#633806}
-.live-btn.amber:hover{background:#FAC775}
-.live-btn.pink{background:#FBEAF0;color:#72243E}
-.live-btn.pink:hover{background:#F4C0D1}
-.loading-msg{text-align:center;padding:3rem;color:#888780;font-size:14px;font-weight:700}
-.live-badge{display:inline-block;background:#E1F5EE;color:#0F6E56;font-size:10px;font-weight:700;padding:2px 8px;border-radius:50px;margin-bottom:6px}
+.feat-label{font-size:12px;font-weight:700;color:#888780;margin-top:10px;text-align:center;white-space:nowrap}
+.feat-popup{position:absolute;bottom:calc(100% + 16px);left:50%;transform:translateX(-50%) scale(0.88) translateY(6px);background:#2C2C2A;color:#fff;border-radius:16px;padding:1rem 1.1rem;width:190px;pointer-events:none;opacity:0;transition:opacity .2s,transform .22s cubic-bezier(.34,1.56,.64,1);z-index:999;text-align:left;box-shadow:0 8px 32px rgba(0,0,0,.18)}
+.feat-popup::after{content:'';position:absolute;top:100%;left:50%;transform:translateX(-50%);border:7px solid transparent;border-top-color:#2C2C2A}
+.feat-item:hover .feat-popup{opacity:1;transform:translateX(-50%) scale(1) translateY(0)}
+.feat-popup strong{display:block;font-size:13px;font-weight:800;margin-bottom:5px;color:#fff}
+.feat-popup p{font-size:11px;color:rgba(255,255,255,.75);line-height:1.55;margin-bottom:8px}
+.feat-popup .feat-cta{font-size:10px;font-weight:700;background:#D85A30;color:#fff;padding:4px 10px;border-radius:50px;display:inline-block}
+.feat-divider{width:1px;height:44px;background:#F0E8D8;flex-shrink:0}
+
+/* NUTRITION */
 #nutrition{background:linear-gradient(135deg,#E1F5EE 0%,#FFFBF5 100%)}
 .nutrition-inner{display:flex;gap:3rem;align-items:center}
 .nutrition-text{flex:1}
@@ -108,21 +88,48 @@ section{padding:5rem 2rem}
 .nut-card h4{font-size:14px;font-weight:800;color:#2C2C2A;margin-bottom:2px}
 .nut-card p{font-size:12px;color:#5F5E5A;line-height:1.5}
 .nut-tip{background:#0F6E56;color:#fff;font-size:10px;font-weight:700;padding:2px 8px;border-radius:50px;display:inline-block;margin-top:3px}
+
+/* LIVE SECTIONS */
+.live-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.2rem;margin-top:2rem}
+.live-card{background:#fff;border:1.5px solid #F0E8D8;border-radius:20px;overflow:hidden;transition:transform .2s;cursor:pointer;display:flex;flex-direction:column}
+.live-card:hover{transform:translateY(-4px)}
+.live-banner{height:140px;display:flex;align-items:center;justify-content:center;font-size:40px;position:relative;overflow:hidden}
+.live-banner.b1{background:linear-gradient(135deg,#FAEEDA,#FAC775)}
+.live-banner.b2{background:linear-gradient(135deg,#E1F5EE,#9FE1CB)}
+.live-banner.b3{background:linear-gradient(135deg,#EEEDFE,#AFA9EC)}
+.live-banner.b4{background:linear-gradient(135deg,#FAECE7,#F0997B)}
+.live-banner.b5{background:linear-gradient(135deg,#E6F1FB,#B5D4F4)}
+.live-banner.b6{background:linear-gradient(135deg,#FBEAF0,#F4C0D1)}
+.live-banner-emoji{position:relative;z-index:1;font-size:40px}
+.live-src{position:absolute;bottom:8px;right:10px;background:rgba(255,255,255,.85);border-radius:8px;padding:2px 8px;font-size:10px;font-weight:700;color:#5F5E5A;z-index:2}
+.live-body{padding:1rem 1.2rem;display:flex;flex-direction:column;flex:1}
+.live-body h4{font-size:14px;font-weight:800;color:#2C2C2A;margin-bottom:4px;line-height:1.4}
+.live-body p{font-size:12px;color:#5F5E5A;line-height:1.5;margin-bottom:.7rem;flex:1}
+.live-btn{width:100%;border:none;padding:8px;border-radius:10px;font-family:'Nunito',sans-serif;font-weight:700;font-size:12px;cursor:pointer;transition:background .2s;margin-top:auto}
+.live-btn.orange{background:#FAECE7;color:#993C1D}.live-btn.orange:hover{background:#F5C4B3}
+.live-btn.green{background:#E1F5EE;color:#0F6E56}.live-btn.green:hover{background:#9FE1CB}
+.live-btn.amber{background:#FAEEDA;color:#633806}.live-btn.amber:hover{background:#FAC775}
+.live-btn.pink{background:#FBEAF0;color:#72243E}.live-btn.pink:hover{background:#F4C0D1}
+.loading-msg{text-align:center;padding:3rem;color:#888780;font-size:14px;font-weight:700}
+.live-badge{display:inline-block;background:#E1F5EE;color:#0F6E56;font-size:10px;font-weight:700;padding:2px 8px;border-radius:50px;margin-bottom:6px}
+.refresh-btn{border:none;border-radius:50px;padding:10px 18px;font-family:'Nunito',sans-serif;font-weight:700;font-size:13px;cursor:pointer}
+
+/* COMMUNITY */
 #community{background:#fff}
 .community-inner{display:flex;gap:3rem;align-items:flex-start}
 .feed{display:flex;flex-direction:column;gap:1rem;max-width:560px}
 .post{background:#FFFBF5;border:1.5px solid #F0E8D8;border-radius:20px;padding:1.1rem 1.4rem}
 .post-header{display:flex;align-items:center;gap:10px;margin-bottom:.7rem}
 .post-av{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
-.post-av.a1{background:#FAC775}
-.post-av.a2{background:#9FE1CB}
-.post-av.a3{background:#F4C0D1}
+.post-av.a1{background:#FAC775}.post-av.a2{background:#9FE1CB}.post-av.a3{background:#F4C0D1}
 .post-user strong{font-size:13px;font-weight:800;color:#2C2C2A;display:block}
 .post-user span{font-size:11px;color:#888780}
 .post p{font-size:13px;color:#444441;line-height:1.65;margin-bottom:.7rem}
 .post-actions{display:flex;gap:.8rem}
 .post-action{background:none;border:none;font-family:'Nunito',sans-serif;font-size:12px;color:#888780;cursor:pointer;font-weight:700;padding:4px 10px;border-radius:8px;transition:background .2s}
 .post-action:hover{background:#F0E8D8;color:#2C2C2A}
+
+/* KOPI AI */
 #askmela{background:linear-gradient(135deg,#1D9E75 0%,#0F6E56 100%);padding:5rem 2rem}
 #askmela .section-label{color:#9FE1CB}
 #askmela .section-title{color:#fff}
@@ -154,6 +161,8 @@ section{padding:5rem 2rem}
 .quick-chips{display:flex;gap:6px;flex-wrap:wrap;padding:.6rem 1.5rem;background:#fff;border-bottom:1px solid #F0E8D8}
 .chip{background:#E1F5EE;color:#0F6E56;border:none;border-radius:50px;padding:6px 12px;font-family:'Nunito',sans-serif;font-size:11px;font-weight:700;cursor:pointer}
 .chip:hover{background:#9FE1CB}
+
+/* ABOUT */
 #about{background:linear-gradient(135deg,#D85A30 0%,#993C1D 100%);color:#fff}
 #about .section-label{color:#FAC775}
 #about .section-title{color:#fff}
@@ -162,12 +171,14 @@ section{padding:5rem 2rem}
 .about-card{background:rgba(255,255,255,.14);border-radius:16px;padding:1.3rem;text-align:center}
 .about-number{font-size:36px;font-weight:900;color:#FAC775;margin-bottom:4px}
 .about-label{font-size:13px;font-weight:700;color:rgba(255,255,255,.9)}
+
 footer{background:#2C2C2A;color:#B4B2A9;padding:2rem;text-align:center}
 .footer-logo{font-size:20px;font-weight:900;color:#EF9F27;margin-bottom:.5rem}
 .footer-links{display:flex;gap:1.2rem;justify-content:center;margin:.8rem 0;flex-wrap:wrap}
 .footer-links a{color:#888780;text-decoration:none;font-size:12px;font-weight:600}
 .footer-links a:hover{color:#EF9F27}
 footer p{font-size:12px;line-height:1.7}
+
 @media(max-width:768px){
   .hero-inner,.nutrition-inner,.community-inner,.profile-card{flex-direction:column}
   .hero-text h1{font-size:28px}
@@ -175,28 +186,16 @@ footer p{font-size:12px;line-height:1.7}
   .nav-links{display:none}
   .posts-grid{grid-template-columns:repeat(3,1fr)}
   .section-title{font-size:24px}
-  .section-sub{font-size:14px}
-  .features-grid{grid-template-columns:repeat(2,1fr)}
+  .features-row{flex-wrap:wrap;gap:1rem;padding:1.5rem}
+  .feat-item{padding:0 1rem}
+  .feat-divider{display:none}
   .live-grid{grid-template-columns:1fr}
   .about-grid{grid-template-columns:repeat(2,1fr)}
-  .profile-card{padding:1.2rem}
-  .profile-stats{gap:.8rem;flex-wrap:wrap}
   .hero-btns{flex-direction:column}
   .btn-primary,.btn-secondary{width:100%;text-align:center}
   section{padding:3rem 1.2rem}
-  .chat-wrapper{margin:1.5rem 0 0}
-  .quick-chips{gap:4px}
-  .chip{font-size:10px;padding:5px 10px}
   .community-inner{flex-direction:column}
   .feed{max-width:100%}
-  .nutrition-inner{gap:1.5rem}
-  .nutrition-cards{width:100%}
-  nav{padding:0 1rem}
-  .logo{font-size:18px}
-  .nav-cta{padding:8px 14px;font-size:12px}
-  .profile-avatar{width:70px;height:70px;font-size:32px}
-  .profile-name{font-size:17px}
-  .live-grid{grid-template-columns:repeat(auto-fit,minmax(160px,1fr))}
 }
 </style>
 </head>
@@ -218,6 +217,7 @@ footer p{font-size:12px;line-height:1.7}
   </div>
 </nav>
 
+<!-- HERO -->
 <section id="home">
   <div class="container">
     <div class="hero-inner">
@@ -234,6 +234,7 @@ footer p{font-size:12px;line-height:1.7}
   </div>
 </section>
 
+<!-- PROFILE -->
 <section id="profile">
   <div class="container">
     <div class="profile-card">
@@ -260,50 +261,89 @@ footer p{font-size:12px;line-height:1.7}
   </div>
 </section>
 
+<!-- FEATURES -->
 <section id="features">
   <div class="container">
     <div class="section-label">What we offer</div>
     <h2 class="section-title">Everything your pet needs 🐾</h2>
-    <p class="section-sub">From nutrition to socialising, PawConnect is your all-in-one companion for a happier, healthier pet life in Singapore.</p>
-    <div class="features-hero">
-      <div class="feat-big orange" onclick="document.getElementById('cafes').scrollIntoView({behavior:'smooth'})">
-        <span class="feat-emoji">☕</span>
-        <h3>Pet-Friendly Cafe Finder</h3>
-        <p>Discover cafes across Singapore that welcome your furry best friends — with live reviews and ratings.</p>
+    <p class="section-sub">Hover over each feature to find out more lah!</p>
+    <div class="features-row">
+
+      <div class="feat-item" onclick="document.getElementById('cafes').scrollIntoView({behavior:'smooth'})">
+        <div class="feat-popup">
+          <strong>Cafe Finder ☕</strong>
+          <p>Discover pet-friendly cafes across Singapore with live reviews.</p>
+          <span class="feat-cta">Explore →</span>
+        </div>
+        <div class="feat-icon-wrap orange">☕</div>
+        <div class="feat-label">Cafes</div>
       </div>
-      <div class="features-side">
-        <div class="feat-big green" onclick="document.getElementById('nutrition').scrollIntoView({behavior:'smooth'})">
-          <span class="feat-emoji">🥗</span>
-          <h3>Nutrition Hub</h3>
+
+      <div class="feat-divider"></div>
+
+      <div class="feat-item" onclick="document.getElementById('nutrition').scrollIntoView({behavior:'smooth'})">
+        <div class="feat-popup">
+          <strong>Nutrition Hub 🥗</strong>
           <p>Personalised diet guides for every breed and age.</p>
+          <span class="feat-cta">Explore →</span>
         </div>
-        <div class="feat-small-grid">
-          <div class="feat-small amber" onclick="document.getElementById('events').scrollIntoView({behavior:'smooth'})">
-            <span class="feat-emoji">📅</span>
-            <h3>Pet Events</h3>
-            <p>Real-time meetups & events near you.</p>
-          </div>
-          <div class="feat-small pink" onclick="document.getElementById('grooming').scrollIntoView({behavior:'smooth'})">
-            <span class="feat-emoji">✂️</span>
-            <h3>Grooming</h3>
-            <p>Book trusted groomers island-wide.</p>
-          </div>
-          <div class="feat-small blue" onclick="document.getElementById('vets').scrollIntoView({behavior:'smooth'})">
-            <span class="feat-emoji">🏥</span>
-            <h3>Vet Directory</h3>
-            <p>Find & book top-rated vets nearby.</p>
-          </div>
-          <div class="feat-small purple" onclick="document.getElementById('askmela').scrollIntoView({behavior:'smooth'})">
-            <span class="feat-emoji">☕</span>
-            <h3>Kopi AI</h3>
-            <p>Your Singlish AI pet kaki, 24/7 lah!</p>
-          </div>
-        </div>
+        <div class="feat-icon-wrap green">🥗</div>
+        <div class="feat-label">Nutrition</div>
       </div>
+
+      <div class="feat-divider"></div>
+
+      <div class="feat-item" onclick="document.getElementById('events').scrollIntoView({behavior:'smooth'})">
+        <div class="feat-popup">
+          <strong>Pet Events 📅</strong>
+          <p>Real-time meetups, adoption drives & events near you.</p>
+          <span class="feat-cta">Explore →</span>
+        </div>
+        <div class="feat-icon-wrap amber">📅</div>
+        <div class="feat-label">Events</div>
+      </div>
+
+      <div class="feat-divider"></div>
+
+      <div class="feat-item" onclick="document.getElementById('grooming').scrollIntoView({behavior:'smooth'})">
+        <div class="feat-popup">
+          <strong>Grooming ✂️</strong>
+          <p>Book trusted groomers across Singapore island-wide.</p>
+          <span class="feat-cta">Explore →</span>
+        </div>
+        <div class="feat-icon-wrap pink">✂️</div>
+        <div class="feat-label">Grooming</div>
+      </div>
+
+      <div class="feat-divider"></div>
+
+      <div class="feat-item" onclick="document.getElementById('vets').scrollIntoView({behavior:'smooth'})">
+        <div class="feat-popup">
+          <strong>Vet Directory 🏥</strong>
+          <p>Find & book top-rated vets and clinics near you.</p>
+          <span class="feat-cta">Explore →</span>
+        </div>
+        <div class="feat-icon-wrap blue">🏥</div>
+        <div class="feat-label">Vets</div>
+      </div>
+
+      <div class="feat-divider"></div>
+
+      <div class="feat-item" onclick="document.getElementById('askmela').scrollIntoView({behavior:'smooth'})">
+        <div class="feat-popup">
+          <strong>Kopi AI ☕</strong>
+          <p>Your Singlish AI pet kaki — ask anything, anytime lah!</p>
+          <span class="feat-cta">Chat now →</span>
+        </div>
+        <div class="feat-icon-wrap purple">☕</div>
+        <div class="feat-label">Kopi AI</div>
+      </div>
+
     </div>
   </div>
 </section>
 
+<!-- NUTRITION -->
 <section id="nutrition">
   <div class="container">
     <div class="nutrition-inner">
@@ -322,6 +362,7 @@ footer p{font-size:12px;line-height:1.7}
   </div>
 </section>
 
+<!-- CAFES -->
 <section id="cafes" style="background:#fff">
   <div class="container">
     <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:.5rem">
@@ -330,12 +371,13 @@ footer p{font-size:12px;line-height:1.7}
         <h2 class="section-title">Find your next paw-date ☕</h2>
         <p class="section-sub">Live listings of cafes across Singapore that welcome your furry best friends.</p>
       </div>
-      <button onclick="loadSection('cafes')" style="background:#E1F5EE;color:#0F6E56;border:none;border-radius:50px;padding:10px 18px;font-family:'Nunito',sans-serif;font-weight:700;font-size:13px;cursor:pointer">🔄 Refresh</button>
+      <button onclick="loadSection('cafes')" class="refresh-btn" style="background:#E1F5EE;color:#0F6E56">🔄 Refresh</button>
     </div>
     <div id="cafes-results"><div class="loading-msg">☕ Fetching pet-friendly cafes lah...</div></div>
   </div>
 </section>
 
+<!-- EVENTS -->
 <section id="events" style="background:#FFFBF5">
   <div class="container">
     <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:.5rem">
@@ -344,12 +386,13 @@ footer p{font-size:12px;line-height:1.7}
         <h2 class="section-title">Upcoming paw-ties & meetups 📅</h2>
         <p class="section-sub">Real-time events pulled from across Singapore — always up to date lah!</p>
       </div>
-      <button onclick="loadSection('events')" style="background:#FAEEDA;color:#633806;border:none;border-radius:50px;padding:10px 18px;font-family:'Nunito',sans-serif;font-weight:700;font-size:13px;cursor:pointer">🔄 Refresh</button>
+      <button onclick="loadSection('events')" class="refresh-btn" style="background:#FAEEDA;color:#633806">🔄 Refresh</button>
     </div>
     <div id="events-results"><div class="loading-msg">🐾 Sniffing out the latest events...</div></div>
   </div>
 </section>
 
+<!-- GROOMING -->
 <section id="grooming" style="background:#fff">
   <div class="container">
     <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:.5rem">
@@ -358,12 +401,13 @@ footer p{font-size:12px;line-height:1.7}
         <h2 class="section-title">Look good, feel shiok ✂️</h2>
         <p class="section-sub">Live listings of trusted pet groomers across Singapore.</p>
       </div>
-      <button onclick="loadSection('grooming')" style="background:#FBEAF0;color:#72243E;border:none;border-radius:50px;padding:10px 18px;font-family:'Nunito',sans-serif;font-weight:700;font-size:13px;cursor:pointer">🔄 Refresh</button>
+      <button onclick="loadSection('grooming')" class="refresh-btn" style="background:#FBEAF0;color:#72243E">🔄 Refresh</button>
     </div>
     <div id="grooming-results"><div class="loading-msg">✂️ Finding the best groomers...</div></div>
   </div>
 </section>
 
+<!-- VETS -->
 <section id="vets" style="background:#FFFBF5">
   <div class="container">
     <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:.5rem">
@@ -372,13 +416,14 @@ footer p{font-size:12px;line-height:1.7}
         <h2 class="section-title">Trusted vets near you 🏥</h2>
         <p class="section-sub">Live directory of Singapore's top-rated veterinary clinics.</p>
       </div>
-      <button onclick="loadSection('vets')" style="background:#E6F1FB;color:#185FA5;border:none;border-radius:50px;padding:10px 18px;font-family:'Nunito',sans-serif;font-weight:700;font-size:13px;cursor:pointer">🔄 Refresh</button>
+      <button onclick="loadSection('vets')" class="refresh-btn" style="background:#E6F1FB;color:#185FA5">🔄 Refresh</button>
     </div>
     <div id="vets-results"><div class="loading-msg">🏥 Locating trusted vets...</div></div>
   </div>
 </section>
 
-<section id="community" style="background:#fff">
+<!-- COMMUNITY -->
+<section id="community">
   <div class="container">
     <div class="community-inner">
       <div style="flex:1;padding-top:.5rem">
@@ -388,14 +433,15 @@ footer p{font-size:12px;line-height:1.7}
         <button class="btn-primary">Join the Community</button>
       </div>
       <div class="feed">
-        <div class="post"><div class="post-header"><div class="post-av a1">🐶</div><div class="post-user"><strong>Bella's Mama</strong><span>Golden Retriever · Sengkang</span></div></div><p>Just tried the grain-free recipe from PawConnect — Bella LOVES it! Her coat is already shinier. Confirm plus chop recommend lah! 🌟</p><div class="post-actions"><button class="post-action">❤️ 48</button><button class="post-action">💬 12</button></div></div>
-        <div class="post"><div class="post-header"><div class="post-av a2">🐈</div><div class="post-user"><strong>Whiskers Dad</strong><span>Cat owner · Clementi</span></div></div><p>Went to Greens & Tails in Holland V with Mochi — staff so accommodating, even brought water bowl without asking! 😻</p><div class="post-actions"><button class="post-action">❤️ 31</button><button class="post-action">💬 8</button></div></div>
-        <div class="post"><div class="post-header"><div class="post-av a3">🐇</div><div class="post-user"><strong>BunnyMom SG</strong><span>Rabbit owner · Jurong</span></div></div><p>Dr. Priya Nair also sees rabbits! She was amazing with my Holland Lop. Booking through PawConnect was super easy 🙌</p><div class="post-actions"><button class="post-action">❤️ 57</button><button class="post-action">💬 19</button></div></div>
+        <div class="post"><div class="post-header"><div class="post-av a1">🐶</div><div class="post-user"><strong>Bella's Mama</strong><span>Golden Retriever · Sengkang</span></div></div><p>Just tried the grain-free recipe from PawConnect — Bella LOVES it! Confirm plus chop recommend lah! 🌟</p><div class="post-actions"><button class="post-action">❤️ 48</button><button class="post-action">💬 12</button></div></div>
+        <div class="post"><div class="post-header"><div class="post-av a2">🐈</div><div class="post-user"><strong>Whiskers Dad</strong><span>Cat owner · Clementi</span></div></div><p>Went to Greens & Tails in Holland V — staff so accommodating, even brought water bowl without asking! 😻</p><div class="post-actions"><button class="post-action">❤️ 31</button><button class="post-action">💬 8</button></div></div>
+        <div class="post"><div class="post-header"><div class="post-av a3">🐇</div><div class="post-user"><strong>BunnyMom SG</strong><span>Rabbit owner · Jurong</span></div></div><p>Dr. Priya Nair also sees rabbits! Booking through PawConnect was super easy 🙌</p><div class="post-actions"><button class="post-action">❤️ 57</button><button class="post-action">💬 19</button></div></div>
       </div>
     </div>
   </div>
 </section>
 
+<!-- KOPI AI -->
 <section id="askmela">
   <div class="container" style="text-align:center">
     <div class="section-label">AskMeLah — AI-Powered Help</div>
@@ -427,6 +473,7 @@ footer p{font-size:12px;line-height:1.7}
   </div>
 </section>
 
+<!-- ABOUT -->
 <section id="about">
   <div class="container">
     <div class="section-label">About PawConnect</div>
@@ -453,9 +500,8 @@ footer p{font-size:12px;line-height:1.7}
 </footer>
 
 <script>
-const API_URL = 'https://deluxe-stardust-da24ba.netlify.app/api/search';
-
-const sectionConfig = {
+const API_URL='https://deluxe-stardust-da24ba.netlify.app/api/search';
+const sectionConfig={
   cafes:{query:'pet friendly cafe Singapore 2026',emojis:['☕','🐾','🌿','🍵','🐶','🐱','🌸','🍰'],btnClass:'green',btnText:'Visit Cafe →'},
   events:{query:'pet events Singapore 2026',emojis:['🐾','🏃','📸','🎓','🐶','🐱','🎪','🌳'],btnClass:'amber',btnText:'View Event →'},
   grooming:{query:'pet grooming service Singapore',emojis:['✂️','🛁','🐶','🐱','💅','🪮','🧴','🌸'],btnClass:'pink',btnText:'Book Now →'},
@@ -467,11 +513,7 @@ async function loadSection(section){
   const box=document.getElementById(section+'-results');
   box.innerHTML=`<div class="loading-msg">🔍 Fetching latest ${section} info lah...</div>`;
   try{
-    const res=await fetch(API_URL,{
-      method:'POST',
-      headers:{'Content-Type':'application/json'},
-      body:JSON.stringify({q:cfg.query})
-    });
+    const res=await fetch(API_URL,{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({q:cfg.query})});
     const data=await res.json();
     const results=[...(data.organic||[]),...(data.news||[])].slice(0,8);
     if(!results.length){box.innerHTML=`<div class="loading-msg">Aiyah, no results leh! Try refreshing lah 😅</div>`;return;}
@@ -480,13 +522,14 @@ async function loadSection(section){
       const title=(r.title||'').replace(/[<>]/g,'');
       const snippet=(r.snippet||r.description||'Click to find out more!').replace(/[<>]/g,'');
       const link=r.link||'#';
-      let host='';try{host=new URL(link).hostname.replace('www.','');}catch(e){}
+      let host='',domain='';
+      try{const u=new URL(link);host=u.hostname.replace('www.','');domain=u.hostname;}catch(e){}
       const src=r.source||host;
       const date=r.date||'';
-      const img = r.imageUrl || (r.thumbnailUrl) || '';
-      const bannerContent = img
-        ? `<img src="${img}" alt="${title}" onerror="this.style.display='none'"><div class="live-src">${src}</div>`
-        : `<span class="live-banner-emoji">${cfg.emojis[i%8]}</span>${src?`<div class="live-src">${src}</div>`:''}`;
+      const imgUrl=r.imageUrl||'';
+      const bannerContent=imgUrl
+        ?`<img src="${imgUrl}" alt="${title}" style="width:100%;height:100%;object-fit:cover;position:absolute;inset:0" onerror="this.src='https://www.google.com/s2/favicons?domain=${domain}&sz=128';this.style.cssText='width:56px;height:56px;object-fit:contain;position:relative'"><div class="live-src">${src}</div>`
+        :`<span class="live-banner-emoji">${cfg.emojis[i%8]}</span>${src?`<div class="live-src">${src}</div>`:''}`;
       return `<div class="live-card" onclick="window.open('${link}','_blank')">
         <div class="live-banner ${banners[i]}">${bannerContent}</div>
         <div class="live-body">
