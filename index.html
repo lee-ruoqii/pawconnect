@@ -1,34 +1,520 @@
-exports.handler = async function(event) {
-  const SERPER_KEY = 'd0ff15f06a2308c5e59722a0321f1ec284c41e49';
-  const { q } = JSON.parse(event.body || '{}');
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>PawConnect</title>
+<link href="https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800;900&display=swap" rel="stylesheet">
+<style>
+*{margin:0;padding:0;box-sizing:border-box}
+body{font-family:'Nunito',sans-serif;background:#FFFBF5;color:#2C2C2A;scroll-behavior:smooth}
+nav{position:fixed;top:0;width:100%;background:rgba(255,251,245,0.96);backdrop-filter:blur(8px);z-index:200;border-bottom:1px solid #F0E8D8;padding:0 2rem}
+.nav-inner{max-width:1100px;margin:0 auto;display:flex;align-items:center;justify-content:space-between;height:64px}
+.logo{font-size:22px;font-weight:900;color:#D85A30}
+.logo span{color:#1D9E75}
+.nav-links{display:flex;gap:1.5rem;list-style:none}
+.nav-links a{text-decoration:none;color:#5F5E5A;font-weight:700;font-size:14px;transition:color .2s}
+.nav-links a:hover{color:#D85A30}
+.nav-cta{background:#D85A30;color:#fff;border:none;padding:10px 20px;border-radius:50px;font-family:'Nunito',sans-serif;font-weight:700;font-size:14px;cursor:pointer}
+.nav-cta:hover{background:#993C1D}
+section{padding:5rem 2rem}
+.container{max-width:1100px;margin:0 auto}
+.section-label{font-size:12px;font-weight:700;color:#D85A30;letter-spacing:1.5px;text-transform:uppercase;margin-bottom:.5rem}
+.section-title{font-size:34px;font-weight:900;color:#2C2C2A;margin-bottom:.7rem;line-height:1.2}
+.section-sub{font-size:16px;color:#5F5E5A;max-width:560px;line-height:1.7}
+.btn-primary{background:#D85A30;color:#fff;padding:13px 26px;border-radius:50px;font-family:'Nunito',sans-serif;font-weight:700;font-size:15px;border:none;cursor:pointer;transition:all .2s}
+.btn-primary:hover{background:#993C1D;transform:translateY(-2px)}
+.btn-secondary{background:#fff;color:#1D9E75;padding:13px 26px;border-radius:50px;font-family:'Nunito',sans-serif;font-weight:700;font-size:15px;border:2px solid #1D9E75;cursor:pointer;transition:all .2s}
+.btn-secondary:hover{background:#E1F5EE}
+#home{background:linear-gradient(135deg,#FFF8EE 0%,#E1F5EE 100%);padding-top:8rem}
+.hero-inner{display:flex;align-items:center;gap:3rem}
+.hero-text{flex:1}
+.badge{display:inline-block;background:#FAC775;color:#633806;font-size:12px;font-weight:700;padding:5px 14px;border-radius:50px;margin-bottom:1.2rem}
+.hero-text h1{font-size:48px;font-weight:900;line-height:1.1;margin-bottom:1rem}
+.hero-text h1 span{color:#D85A30}
+.hero-text p{font-size:17px;color:#5F5E5A;line-height:1.7;margin-bottom:2rem;max-width:460px}
+.hero-btns{display:flex;gap:1rem;flex-wrap:wrap}
+#profile{background:#F7F4EF;padding:3rem 2rem}
+.profile-card{max-width:780px;margin:0 auto;background:#fff;border:1.5px solid #F0E8D8;border-radius:24px;padding:1.8rem 2rem;box-shadow:0 8px 40px rgba(0,0,0,.07);display:flex;align-items:center;gap:2rem}
+.profile-avatar{width:88px;height:88px;border-radius:50%;background:linear-gradient(135deg,#FAC775,#EF9F27);border:4px solid #fff;box-shadow:0 4px 16px rgba(0,0,0,.1);display:flex;align-items:center;justify-content:center;font-size:40px;flex-shrink:0}
+.profile-info{flex:1}
+.profile-name{font-size:20px;font-weight:900;color:#2C2C2A}
+.profile-handle{font-size:12px;color:#888780;font-weight:600;margin-bottom:.8rem}
+.profile-stats{display:flex;gap:1.5rem;margin-bottom:1rem}
+.pstat{text-align:center}
+.pstat strong{display:block;font-size:20px;font-weight:900;color:#D85A30}
+.pstat span{font-size:11px;color:#888780;font-weight:600}
+.posts-grid{display:grid;grid-template-columns:repeat(6,1fr);gap:8px}
+.post-thumb{border-radius:12px;aspect-ratio:1;display:flex;align-items:center;justify-content:center;font-size:28px;cursor:pointer;transition:transform .2s}
+.post-thumb:hover{transform:scale(1.06)}
+.post-thumb.p1{background:linear-gradient(135deg,#FAC775,#EF9F27)}
+.post-thumb.p2{background:linear-gradient(135deg,#9FE1CB,#1D9E75)}
+.post-thumb.p3{background:linear-gradient(135deg,#F4C0D1,#D4537E)}
+.post-thumb.p4{background:linear-gradient(135deg,#B5D4F4,#378ADD)}
+.post-thumb.p5{background:linear-gradient(135deg,#CED0F6,#7F77DD)}
+.post-thumb.p6{background:linear-gradient(135deg,#FAC775,#D85A30)}
+#features{background:#fff}
+.features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1.2rem;margin-top:2.5rem}
+.feature-card{background:#FFFBF5;border:1.5px solid #F0E8D8;border-radius:20px;padding:1.4rem;transition:transform .2s}
+.feature-card:hover{transform:translateY(-4px)}
+.feat-icon{width:46px;height:46px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:.8rem}
+.feat-icon.orange{background:#FAECE7}
+.feat-icon.green{background:#E1F5EE}
+.feat-icon.amber{background:#FAEEDA}
+.feat-icon.pink{background:#FBEAF0}
+.feat-icon.blue{background:#E6F1FB}
+.feat-icon.purple{background:#EEEDFE}
+.feature-card h3{font-size:15px;font-weight:800;color:#2C2C2A;margin-bottom:.3rem}
+.feature-card p{font-size:12px;color:#5F5E5A;line-height:1.6}
+.live-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.2rem;margin-top:2rem}
+.live-card{background:#fff;border:1.5px solid #F0E8D8;border-radius:20px;overflow:hidden;transition:transform .2s;cursor:pointer;display:flex;flex-direction:column}
+.live-card:hover{transform:translateY(-4px)}
+.live-banner{height:140px;display:flex;align-items:center;justify-content:center;font-size:40px;position:relative;overflow:hidden}
+.live-banner img{width:100%;height:100%;object-fit:cover;position:absolute;inset:0}
+.live-banner-emoji{position:relative;z-index:1;font-size:40px}
+.live-banner.b1{background:linear-gradient(135deg,#FAEEDA,#FAC775)}
+.live-banner.b2{background:linear-gradient(135deg,#E1F5EE,#9FE1CB)}
+.live-banner.b3{background:linear-gradient(135deg,#EEEDFE,#AFA9EC)}
+.live-banner.b4{background:linear-gradient(135deg,#FAECE7,#F0997B)}
+.live-banner.b5{background:linear-gradient(135deg,#E6F1FB,#B5D4F4)}
+.live-banner.b6{background:linear-gradient(135deg,#FBEAF0,#F4C0D1)}
+.live-src{position:absolute;bottom:8px;right:10px;background:rgba(255,255,255,.85);border-radius:8px;padding:2px 8px;font-size:10px;font-weight:700;color:#5F5E5A}
+.live-body{padding:1rem 1.2rem;display:flex;flex-direction:column;flex:1}
+.live-body h4{font-size:14px;font-weight:800;color:#2C2C2A;margin-bottom:4px;line-height:1.4}
+.live-body p{font-size:12px;color:#5F5E5A;line-height:1.5;margin-bottom:.7rem;flex:1}
+.live-btn{width:100%;border:none;padding:8px;border-radius:10px;font-family:'Nunito',sans-serif;font-weight:700;font-size:12px;cursor:pointer;transition:background .2s;margin-top:auto}
+.live-btn.orange{background:#FAECE7;color:#993C1D}
+.live-btn.orange:hover{background:#F5C4B3}
+.live-btn.green{background:#E1F5EE;color:#0F6E56}
+.live-btn.green:hover{background:#9FE1CB}
+.live-btn.amber{background:#FAEEDA;color:#633806}
+.live-btn.amber:hover{background:#FAC775}
+.live-btn.pink{background:#FBEAF0;color:#72243E}
+.live-btn.pink:hover{background:#F4C0D1}
+.loading-msg{text-align:center;padding:3rem;color:#888780;font-size:14px;font-weight:700}
+.live-badge{display:inline-block;background:#E1F5EE;color:#0F6E56;font-size:10px;font-weight:700;padding:2px 8px;border-radius:50px;margin-bottom:6px}
+#nutrition{background:linear-gradient(135deg,#E1F5EE 0%,#FFFBF5 100%)}
+.nutrition-inner{display:flex;gap:3rem;align-items:center}
+.nutrition-text{flex:1}
+.nutrition-cards{flex:1;display:flex;flex-direction:column;gap:.9rem}
+.nut-card{background:#fff;border-radius:16px;padding:1.1rem 1.4rem;display:flex;align-items:center;gap:1rem;border:1.5px solid #9FE1CB}
+.nut-icon{font-size:28px;flex-shrink:0}
+.nut-card h4{font-size:14px;font-weight:800;color:#2C2C2A;margin-bottom:2px}
+.nut-card p{font-size:12px;color:#5F5E5A;line-height:1.5}
+.nut-tip{background:#0F6E56;color:#fff;font-size:10px;font-weight:700;padding:2px 8px;border-radius:50px;display:inline-block;margin-top:3px}
+#community{background:#fff}
+.community-inner{display:flex;gap:3rem;align-items:flex-start}
+.feed{display:flex;flex-direction:column;gap:1rem;max-width:560px}
+.post{background:#FFFBF5;border:1.5px solid #F0E8D8;border-radius:20px;padding:1.1rem 1.4rem}
+.post-header{display:flex;align-items:center;gap:10px;margin-bottom:.7rem}
+.post-av{width:38px;height:38px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;flex-shrink:0}
+.post-av.a1{background:#FAC775}
+.post-av.a2{background:#9FE1CB}
+.post-av.a3{background:#F4C0D1}
+.post-user strong{font-size:13px;font-weight:800;color:#2C2C2A;display:block}
+.post-user span{font-size:11px;color:#888780}
+.post p{font-size:13px;color:#444441;line-height:1.65;margin-bottom:.7rem}
+.post-actions{display:flex;gap:.8rem}
+.post-action{background:none;border:none;font-family:'Nunito',sans-serif;font-size:12px;color:#888780;cursor:pointer;font-weight:700;padding:4px 10px;border-radius:8px;transition:background .2s}
+.post-action:hover{background:#F0E8D8;color:#2C2C2A}
+#askmela{background:linear-gradient(135deg,#1D9E75 0%,#0F6E56 100%);padding:5rem 2rem}
+#askmela .section-label{color:#9FE1CB}
+#askmela .section-title{color:#fff}
+#askmela .section-sub{color:rgba(255,255,255,.82)}
+.chat-wrapper{background:#fff;border-radius:24px;overflow:hidden;max-width:680px;margin:2.5rem auto 0;box-shadow:0 20px 60px rgba(0,0,0,.15)}
+.chat-header{background:#0F6E56;padding:1rem 1.5rem;display:flex;align-items:center;gap:12px}
+.bot-avatar{width:42px;height:42px;border-radius:50%;background:#FAC775;display:flex;align-items:center;justify-content:center;font-size:20px;flex-shrink:0}
+.bot-info strong{color:#fff;font-size:15px;font-weight:800;display:block}
+.bot-info span{color:#9FE1CB;font-size:12px}
+.online-dot{width:8px;height:8px;background:#4ADE80;border-radius:50%;margin-left:auto}
+.chat-messages{padding:1.5rem;display:flex;flex-direction:column;gap:1rem;min-height:300px;max-height:360px;overflow-y:auto;background:#FFFBF5}
+.msg{display:flex;gap:10px;align-items:flex-end}
+.msg.user{flex-direction:row-reverse}
+.msg-av{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:11px;flex-shrink:0;font-weight:800}
+.msg-av.bot-av{background:#0F6E56;color:#fff}
+.msg-av.user-av{background:#D85A30;color:#fff;font-size:14px}
+.bubble{max-width:75%;padding:.75rem 1rem;border-radius:18px;font-size:13px;line-height:1.6}
+.bubble.bot{background:#fff;border:1.5px solid #E1F5EE;color:#2C2C2A;border-bottom-left-radius:4px}
+.bubble.user{background:#D85A30;color:#fff;border-bottom-right-radius:4px}
+.typing span{width:6px;height:6px;background:#9FE1CB;border-radius:50%;display:inline-block;animation:bounce 1.2s infinite;margin:0 2px}
+.typing span:nth-child(2){animation-delay:.2s}
+.typing span:nth-child(3){animation-delay:.4s}
+@keyframes bounce{0%,60%,100%{transform:translateY(0)}30%{transform:translateY(-6px)}}
+.chat-input-area{padding:1rem 1.5rem;border-top:1px solid #F0E8D8;background:#fff;display:flex;gap:.8rem}
+.chat-input{flex:1;border:1.5px solid #E1F5EE;border-radius:50px;padding:10px 16px;font-family:'Nunito',sans-serif;font-size:13px;outline:none;background:#FFFBF5}
+.chat-input:focus{border-color:#1D9E75}
+.chat-send{background:#1D9E75;color:#fff;border:none;border-radius:50px;padding:10px 18px;font-family:'Nunito',sans-serif;font-weight:700;font-size:13px;cursor:pointer}
+.chat-send:hover{background:#0F6E56}
+.quick-chips{display:flex;gap:6px;flex-wrap:wrap;padding:.6rem 1.5rem;background:#fff;border-bottom:1px solid #F0E8D8}
+.chip{background:#E1F5EE;color:#0F6E56;border:none;border-radius:50px;padding:6px 12px;font-family:'Nunito',sans-serif;font-size:11px;font-weight:700;cursor:pointer}
+.chip:hover{background:#9FE1CB}
+#about{background:linear-gradient(135deg,#D85A30 0%,#993C1D 100%);color:#fff}
+#about .section-label{color:#FAC775}
+#about .section-title{color:#fff}
+#about .section-sub{color:rgba(255,255,255,.82);max-width:600px}
+.about-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(160px,1fr));gap:1.2rem;margin-top:2.5rem}
+.about-card{background:rgba(255,255,255,.14);border-radius:16px;padding:1.3rem;text-align:center}
+.about-number{font-size:36px;font-weight:900;color:#FAC775;margin-bottom:4px}
+.about-label{font-size:13px;font-weight:700;color:rgba(255,255,255,.9)}
+footer{background:#2C2C2A;color:#B4B2A9;padding:2rem;text-align:center}
+.footer-logo{font-size:20px;font-weight:900;color:#EF9F27;margin-bottom:.5rem}
+.footer-links{display:flex;gap:1.2rem;justify-content:center;margin:.8rem 0;flex-wrap:wrap}
+.footer-links a{color:#888780;text-decoration:none;font-size:12px;font-weight:600}
+.footer-links a:hover{color:#EF9F27}
+footer p{font-size:12px;line-height:1.7}
+@media(max-width:768px){
+  .hero-inner,.nutrition-inner,.community-inner,.profile-card{flex-direction:column}
+  .hero-text h1{font-size:28px}
+  .hero-text p{font-size:15px}
+  .nav-links{display:none}
+  .posts-grid{grid-template-columns:repeat(3,1fr)}
+  .section-title{font-size:24px}
+  .section-sub{font-size:14px}
+  .features-grid{grid-template-columns:repeat(2,1fr)}
+  .live-grid{grid-template-columns:1fr}
+  .about-grid{grid-template-columns:repeat(2,1fr)}
+  .profile-card{padding:1.2rem}
+  .profile-stats{gap:.8rem;flex-wrap:wrap}
+  .hero-btns{flex-direction:column}
+  .btn-primary,.btn-secondary{width:100%;text-align:center}
+  section{padding:3rem 1.2rem}
+  .chat-wrapper{margin:1.5rem 0 0}
+  .quick-chips{gap:4px}
+  .chip{font-size:10px;padding:5px 10px}
+  .community-inner{flex-direction:column}
+  .feed{max-width:100%}
+  .nutrition-inner{gap:1.5rem}
+  .nutrition-cards{width:100%}
+  nav{padding:0 1rem}
+  .logo{font-size:18px}
+  .nav-cta{padding:8px 14px;font-size:12px}
+  .profile-avatar{width:70px;height:70px;font-size:32px}
+  .profile-name{font-size:17px}
+  .live-grid{grid-template-columns:repeat(auto-fit,minmax(160px,1fr))}
+}
+</style>
+</head>
+<body>
 
-  if (!q) {
-    return { statusCode: 400, body: JSON.stringify({ error: 'No query provided' }) };
-  }
+<nav>
+  <div class="nav-inner">
+    <div class="logo">Paw<span>Connect</span></div>
+    <ul class="nav-links">
+      <li><a href="#profile">Profile</a></li>
+      <li><a href="#nutrition">Nutrition</a></li>
+      <li><a href="#cafes">Cafes</a></li>
+      <li><a href="#events">Events</a></li>
+      <li><a href="#grooming">Grooming</a></li>
+      <li><a href="#vets">Vets</a></li>
+      <li><a href="#askmela">AskMeLah</a></li>
+    </ul>
+    <button class="nav-cta">Join Free 🐾</button>
+  </div>
+</nav>
 
-  try {
-    const res = await fetch('https://google.serper.dev/search', {
-      method: 'POST',
-      headers: {
-        'X-API-KEY': SERPER_KEY,
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify({ q, gl: 'sg', hl: 'en', num: 8 })
-    });
+<section id="home">
+  <div class="container">
+    <div class="hero-inner">
+      <div class="hero-text">
+        <div class="badge">🇸🇬 Singapore's #1 Pet Community</div>
+        <h1>The <span>social network</span> built for pet lovers</h1>
+        <p>Connect with fellow pet owners, discover pet-friendly cafes, find trusted vets, get grooming services, and expert nutrition tips — all in one place.</p>
+        <div class="hero-btns">
+          <button class="btn-primary">Get Started Free 🐶</button>
+          <button class="btn-secondary">Explore the App</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-    const data = await res.json();
-    return {
-      statusCode: 200,
-      headers: {
-        'Access-Control-Allow-Origin': '*',
-        'Content-Type': 'application/json'
-      },
-      body: JSON.stringify(data)
-    };
-  } catch (err) {
-    return {
-      statusCode: 500,
-      body: JSON.stringify({ error: 'Search failed', detail: err.message })
-    };
-  }
+<section id="profile">
+  <div class="container">
+    <div class="profile-card">
+      <div class="profile-avatar">🐶</div>
+      <div class="profile-info">
+        <div class="profile-name">Mochi 🐾</div>
+        <div class="profile-handle">@mochi.goldenboy · Golden Retriever · 3 yrs · Bishan, SG</div>
+        <div class="profile-stats">
+          <div class="pstat"><strong>248</strong><span>Followers</span></div>
+          <div class="pstat"><strong>47</strong><span>Posts</span></div>
+          <div class="pstat"><strong>12</strong><span>Cafes</span></div>
+          <div class="pstat"><strong>6</strong><span>Events</span></div>
+        </div>
+        <div class="posts-grid">
+          <div class="post-thumb p1">🌳</div>
+          <div class="post-thumb p2">🎾</div>
+          <div class="post-thumb p3">🛁</div>
+          <div class="post-thumb p4">🍖</div>
+          <div class="post-thumb p5">🐾</div>
+          <div class="post-thumb p6">😴</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="features">
+  <div class="container">
+    <div class="section-label">What we offer</div>
+    <h2 class="section-title">Everything your pet needs 🐾</h2>
+    <p class="section-sub">From nutrition to socialising, PawConnect is your all-in-one companion for a happier, healthier pet life in Singapore.</p>
+    <div class="features-grid">
+      <div class="feature-card"><div class="feat-icon orange">🥗</div><h3>Nutrition Hub</h3><p>Personalised diet guides for your pet's breed and age.</p></div>
+      <div class="feature-card"><div class="feat-icon green">☕</div><h3>Cafe Finder</h3><p>Live pet-friendly cafes across Singapore.</p></div>
+      <div class="feature-card"><div class="feat-icon amber">📅</div><h3>Pet Events</h3><p>Real-time pet events and meetups near you.</p></div>
+      <div class="feature-card"><div class="feat-icon pink">✂️</div><h3>Grooming</h3><p>Book trusted groomers with live listings.</p></div>
+      <div class="feature-card"><div class="feat-icon blue">🏥</div><h3>Vet Directory</h3><p>Find trusted vets and book appointments.</p></div>
+      <div class="feature-card"><div class="feat-icon purple">☕</div><h3>Kopi AI</h3><p>Your Singlish AI pet assistant, anytime lah!</p></div>
+    </div>
+  </div>
+</section>
+
+<section id="nutrition">
+  <div class="container">
+    <div class="nutrition-inner">
+      <div class="nutrition-text">
+        <div class="section-label">Nutrition</div>
+        <h2 class="section-title">Feed them right 🥩</h2>
+        <p class="section-sub" style="margin-bottom:1.5rem">Personalised nutrition advice for your dog, cat, rabbit, or hamster. No more guessing — just happy, healthy pets.</p>
+        <button class="btn-primary">Explore Nutrition Guides</button>
+      </div>
+      <div class="nutrition-cards">
+        <div class="nut-card"><div class="nut-icon">🐕</div><div><h4>Dogs</h4><p>Breed-specific meal plans, portion sizes & safe foods list.</p><span class="nut-tip">Most popular</span></div></div>
+        <div class="nut-card"><div class="nut-icon">🐈</div><div><h4>Cats</h4><p>Wet vs dry food, hairball prevention, and hydration tips.</p></div></div>
+        <div class="nut-card"><div class="nut-icon">🐇</div><div><h4>Small Pets</h4><p>Rabbits, hamsters, guinea pigs — safe veggie & pellet guides.</p></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="cafes" style="background:#fff">
+  <div class="container">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:.5rem">
+      <div>
+        <div class="section-label">Pet-Friendly Cafes</div>
+        <h2 class="section-title">Find your next paw-date ☕</h2>
+        <p class="section-sub">Live listings of cafes across Singapore that welcome your furry best friends.</p>
+      </div>
+      <button onclick="loadSection('cafes')" style="background:#E1F5EE;color:#0F6E56;border:none;border-radius:50px;padding:10px 18px;font-family:'Nunito',sans-serif;font-weight:700;font-size:13px;cursor:pointer">🔄 Refresh</button>
+    </div>
+    <div id="cafes-results"><div class="loading-msg">☕ Fetching pet-friendly cafes lah...</div></div>
+  </div>
+</section>
+
+<section id="events" style="background:#FFFBF5">
+  <div class="container">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:.5rem">
+      <div>
+        <div class="section-label">Pet-Friendly Events</div>
+        <h2 class="section-title">Upcoming paw-ties & meetups 📅</h2>
+        <p class="section-sub">Real-time events pulled from across Singapore — always up to date lah!</p>
+      </div>
+      <button onclick="loadSection('events')" style="background:#FAEEDA;color:#633806;border:none;border-radius:50px;padding:10px 18px;font-family:'Nunito',sans-serif;font-weight:700;font-size:13px;cursor:pointer">🔄 Refresh</button>
+    </div>
+    <div id="events-results"><div class="loading-msg">🐾 Sniffing out the latest events...</div></div>
+  </div>
+</section>
+
+<section id="grooming" style="background:#fff">
+  <div class="container">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:.5rem">
+      <div>
+        <div class="section-label">Grooming Services</div>
+        <h2 class="section-title">Look good, feel shiok ✂️</h2>
+        <p class="section-sub">Live listings of trusted pet groomers across Singapore.</p>
+      </div>
+      <button onclick="loadSection('grooming')" style="background:#FBEAF0;color:#72243E;border:none;border-radius:50px;padding:10px 18px;font-family:'Nunito',sans-serif;font-weight:700;font-size:13px;cursor:pointer">🔄 Refresh</button>
+    </div>
+    <div id="grooming-results"><div class="loading-msg">✂️ Finding the best groomers...</div></div>
+  </div>
+</section>
+
+<section id="vets" style="background:#FFFBF5">
+  <div class="container">
+    <div style="display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;margin-bottom:.5rem">
+      <div>
+        <div class="section-label">Vet Directory</div>
+        <h2 class="section-title">Trusted vets near you 🏥</h2>
+        <p class="section-sub">Live directory of Singapore's top-rated veterinary clinics.</p>
+      </div>
+      <button onclick="loadSection('vets')" style="background:#E6F1FB;color:#185FA5;border:none;border-radius:50px;padding:10px 18px;font-family:'Nunito',sans-serif;font-weight:700;font-size:13px;cursor:pointer">🔄 Refresh</button>
+    </div>
+    <div id="vets-results"><div class="loading-msg">🏥 Locating trusted vets...</div></div>
+  </div>
+</section>
+
+<section id="community" style="background:#fff">
+  <div class="container">
+    <div class="community-inner">
+      <div style="flex:1;padding-top:.5rem">
+        <div class="section-label">Community</div>
+        <h2 class="section-title">Join 50,000+ pet lovers 🐾</h2>
+        <p class="section-sub" style="margin-bottom:1.5rem">Share tips, celebrate milestones, and find support from Singapore's most passionate pet community.</p>
+        <button class="btn-primary">Join the Community</button>
+      </div>
+      <div class="feed">
+        <div class="post"><div class="post-header"><div class="post-av a1">🐶</div><div class="post-user"><strong>Bella's Mama</strong><span>Golden Retriever · Sengkang</span></div></div><p>Just tried the grain-free recipe from PawConnect — Bella LOVES it! Her coat is already shinier. Confirm plus chop recommend lah! 🌟</p><div class="post-actions"><button class="post-action">❤️ 48</button><button class="post-action">💬 12</button></div></div>
+        <div class="post"><div class="post-header"><div class="post-av a2">🐈</div><div class="post-user"><strong>Whiskers Dad</strong><span>Cat owner · Clementi</span></div></div><p>Went to Greens & Tails in Holland V with Mochi — staff so accommodating, even brought water bowl without asking! 😻</p><div class="post-actions"><button class="post-action">❤️ 31</button><button class="post-action">💬 8</button></div></div>
+        <div class="post"><div class="post-header"><div class="post-av a3">🐇</div><div class="post-user"><strong>BunnyMom SG</strong><span>Rabbit owner · Jurong</span></div></div><p>Dr. Priya Nair also sees rabbits! She was amazing with my Holland Lop. Booking through PawConnect was super easy 🙌</p><div class="post-actions"><button class="post-action">❤️ 57</button><button class="post-action">💬 19</button></div></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="askmela">
+  <div class="container" style="text-align:center">
+    <div class="section-label">AskMeLah — AI-Powered Help</div>
+    <h2 class="section-title">Got questions? Ask Kopi lah! ☕</h2>
+    <p class="section-sub" style="margin:0 auto">Meet <strong>Kopi</strong> — your friendly Singlish AI pet assistant. Ask anything about nutrition, health, cafes, grooming, or events lah!</p>
+  </div>
+  <div class="chat-wrapper">
+    <div class="chat-header">
+      <div class="bot-avatar">☕</div>
+      <div class="bot-info"><strong>Kopi</strong><span>AskMeLah AI · Always online lah!</span></div>
+      <div class="online-dot"></div>
+    </div>
+    <div class="quick-chips">
+      <button class="chip" onclick="sendChip('What can my dog eat?')">🥗 Dog diet tips</button>
+      <button class="chip" onclick="sendChip('Pet-friendly cafes in Singapore?')">☕ Cafes near me</button>
+      <button class="chip" onclick="sendChip('How often should I groom my dog?')">✂️ Grooming advice</button>
+      <button class="chip" onclick="sendChip('Any upcoming pet events in Singapore?')">📅 Pet events</button>
+    </div>
+    <div class="chat-messages" id="chatMessages">
+      <div class="msg bot">
+        <div class="msg-av bot-av">K</div>
+        <div class="bubble bot">Wah, hello there! 👋 I'm <strong>Kopi</strong>, your personal pet kaki from AskMeLah! Ask me anything about your furkid — nutrition, grooming, cafes, vets, events — anything one lah! ☕🐾</div>
+      </div>
+    </div>
+    <div class="chat-input-area">
+      <input class="chat-input" id="chatInput" type="text" placeholder="Ask Kopi anything about your pet lah..." onkeydown="if(event.key==='Enter')sendMessage()">
+      <button class="chat-send" onclick="sendMessage()">Send ☕</button>
+    </div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="container">
+    <div class="section-label">About PawConnect</div>
+    <h2 class="section-title">Built by pet lovers, for pet lovers 🐾</h2>
+    <p class="section-sub">Born in Singapore with one mission: make pet ownership easier, more fun, and more connected.</p>
+    <div class="about-grid">
+      <div class="about-card"><div class="about-number">50K+</div><div class="about-label">Pet Owners</div></div>
+      <div class="about-card"><div class="about-number">200+</div><div class="about-label">Cafes Listed</div></div>
+      <div class="about-card"><div class="about-number">150+</div><div class="about-label">Trusted Vets</div></div>
+      <div class="about-card"><div class="about-number">80+</div><div class="about-label">Groomers</div></div>
+      <div class="about-card"><div class="about-number">500+</div><div class="about-label">Nutrition Guides</div></div>
+    </div>
+  </div>
+</section>
+
+<footer>
+  <div class="footer-inner">
+    <div class="footer-logo">PawConnect 🐾</div>
+    <div class="footer-links">
+      <a href="#profile">Profile</a><a href="#nutrition">Nutrition</a><a href="#cafes">Cafes</a><a href="#events">Events</a><a href="#grooming">Grooming</a><a href="#vets">Vets</a><a href="#askmela">AskMeLah</a>
+    </div>
+    <p>Made with ❤️ in Singapore · © 2026 PawConnect · For every paw, whisker, and fin.</p>
+  </div>
+</footer>
+
+<script>
+const API_URL = 'https://deluxe-stardust-da24ba.netlify.app/api/search';
+
+const sectionConfig = {
+  cafes:{query:'pet friendly cafe Singapore 2026',emojis:['☕','🐾','🌿','🍵','🐶','🐱','🌸','🍰'],btnClass:'green',btnText:'Visit Cafe →'},
+  events:{query:'pet events Singapore 2026',emojis:['🐾','🏃','📸','🎓','🐶','🐱','🎪','🌳'],btnClass:'amber',btnText:'View Event →'},
+  grooming:{query:'pet grooming service Singapore',emojis:['✂️','🛁','🐶','🐱','💅','🪮','🧴','🌸'],btnClass:'pink',btnText:'Book Now →'},
+  vets:{query:'veterinary clinic Singapore vet',emojis:['🏥','🩺','🐾','💉','🐶','🐱','🐇','⚕️'],btnClass:'orange',btnText:'Book Appointment →'}
 };
+
+async function loadSection(section){
+  const cfg=sectionConfig[section];
+  const box=document.getElementById(section+'-results');
+  box.innerHTML=`<div class="loading-msg">🔍 Fetching latest ${section} info lah...</div>`;
+  try{
+    const res=await fetch(API_URL,{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({q:cfg.query})
+    });
+    const data=await res.json();
+    const results=[...(data.organic||[]),...(data.news||[])].slice(0,8);
+    if(!results.length){box.innerHTML=`<div class="loading-msg">Aiyah, no results leh! Try refreshing lah 😅</div>`;return;}
+    const banners=['b1','b2','b3','b4','b5','b6','b1','b2'];
+    box.innerHTML=`<div class="live-grid">${results.map((r,i)=>{
+      const title=(r.title||'').replace(/[<>]/g,'');
+      const snippet=(r.snippet||r.description||'Click to find out more!').replace(/[<>]/g,'');
+      const link=r.link||'#';
+      let host='';try{host=new URL(link).hostname.replace('www.','');}catch(e){}
+      const src=r.source||host;
+      const date=r.date||'';
+      return `<div class="live-card" onclick="window.open('${link}','_blank')">
+        <div class="live-banner ${banners[i]}"><span>${cfg.emojis[i%8]}</span>${src?`<div class="live-src">${src}</div>`:''}</div>
+        <div class="live-body">
+          ${date?`<div class="live-badge">📅 ${date}</div>`:''}
+          <h4>${title.length>65?title.slice(0,65)+'…':title}</h4>
+          <p>${snippet.length>110?snippet.slice(0,110)+'…':snippet}</p>
+          <button class="live-btn ${cfg.btnClass}" onclick="event.stopPropagation();window.open('${link}','_blank')">${cfg.btnText}</button>
+        </div>
+      </div>`;
+    }).join('')}</div>
+    <p style="text-align:center;font-size:11px;color:#888780;margin-top:1.2rem">🔍 Live results · Powered by Serper.dev</p>`;
+  }catch(e){
+    box.innerHTML=`<div class="loading-msg" style="color:#D85A30">Alamak! Something went wrong leh 😅 Click Refresh to try again!</div>`;
+  }
+}
+
+window.addEventListener('DOMContentLoaded',()=>{
+  ['cafes','events','grooming','vets'].forEach(s=>loadSection(s));
+});
+
+const messages=[
+  {role:'user',content:'You are Kopi, a friendly AI pet assistant for PawConnect Singapore. Speak warmly in Singlish — use lah, leh, lor, wah, shiok, kaki, confirm plus chop etc naturally but sparingly. Help with pet nutrition, pet-friendly cafes in Singapore, grooming, vets, events, and general pet care. Keep replies to 3-5 sentences. Add 1-2 relevant emojis. Never break character.'},
+  {role:'assistant',content:'Wah, hello there! 👋 I\'m Kopi, your personal pet kaki from AskMeLah! Ask me anything about your furkid — nutrition, grooming, cafes, vets, events — anything one lah! ☕🐾'}
+];
+
+function sendChip(text){document.getElementById('chatInput').value=text;sendMessage();}
+
+async function sendMessage(){
+  const inp=document.getElementById('chatInput');
+  const text=inp.value.trim();
+  if(!text)return;
+  inp.value='';
+  const box=document.getElementById('chatMessages');
+  const uDiv=document.createElement('div');
+  uDiv.className='msg user';
+  uDiv.innerHTML=`<div class="msg-av user-av">🐾</div><div class="bubble user">${text}</div>`;
+  box.appendChild(uDiv);
+  const typDiv=document.createElement('div');
+  typDiv.className='msg bot';typDiv.id='typing';
+  typDiv.innerHTML=`<div class="msg-av bot-av">K</div><div class="bubble bot"><span class="typing"><span></span><span></span><span></span></span></div>`;
+  box.appendChild(typDiv);
+  box.scrollTop=box.scrollHeight;
+  messages.push({role:'user',content:text});
+  try{
+    const res=await fetch('https://api.anthropic.com/v1/messages',{
+      method:'POST',
+      headers:{'Content-Type':'application/json'},
+      body:JSON.stringify({model:'claude-sonnet-4-6',max_tokens:1000,system:messages[0].content,messages:messages.slice(1)})
+    });
+    const data=await res.json();
+    const reply=data.content.map(b=>b.text||'').join('');
+    messages.push({role:'assistant',content:reply});
+    document.getElementById('typing').remove();
+    const bDiv=document.createElement('div');
+    bDiv.className='msg bot';
+    bDiv.innerHTML=`<div class="msg-av bot-av">K</div><div class="bubble bot">${reply}</div>`;
+    box.appendChild(bDiv);
+  }catch(e){
+    document.getElementById('typing').remove();
+    const bDiv=document.createElement('div');
+    bDiv.className='msg bot';
+    bDiv.innerHTML=`<div class="msg-av bot-av">K</div><div class="bubble bot">Aiyah, something went wrong leh! 😅 Try again can?</div>`;
+    box.appendChild(bDiv);
+  }
+  box.scrollTop=box.scrollHeight;
+}
+</script>
+</body>
+</html>
