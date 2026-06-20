@@ -54,18 +54,24 @@ section{padding:5rem 2rem}
 .post-thumb.p5{background:linear-gradient(135deg,#CED0F6,#7F77DD)}
 .post-thumb.p6{background:linear-gradient(135deg,#FAC775,#D85A30)}
 #features{background:#fff}
-.features-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:1.2rem;margin-top:2.5rem}
-.feature-card{background:#FFFBF5;border:1.5px solid #F0E8D8;border-radius:20px;padding:1.4rem;transition:transform .2s}
-.feature-card:hover{transform:translateY(-4px)}
-.feat-icon{width:46px;height:46px;border-radius:13px;display:flex;align-items:center;justify-content:center;font-size:20px;margin-bottom:.8rem}
-.feat-icon.orange{background:#FAECE7}
-.feat-icon.green{background:#E1F5EE}
-.feat-icon.amber{background:#FAEEDA}
-.feat-icon.pink{background:#FBEAF0}
-.feat-icon.blue{background:#E6F1FB}
-.feat-icon.purple{background:#EEEDFE}
-.feature-card h3{font-size:15px;font-weight:800;color:#2C2C2A;margin-bottom:.3rem}
-.feature-card p{font-size:12px;color:#5F5E5A;line-height:1.6}
+.features-row{display:flex;gap:12px;justify-content:center;align-items:center;flex-wrap:wrap;margin-top:2.5rem;padding:1rem 0}
+.feat-item{position:relative;display:flex;flex-direction:column;align-items:center;cursor:pointer}
+.feat-icon-wrap{width:64px;height:64px;border-radius:20px;display:flex;align-items:center;justify-content:center;font-size:28px;transition:transform .2s}
+.feat-item:hover .feat-icon-wrap{transform:translateY(-6px) scale(1.12)}
+.feat-icon-wrap.orange{background:#FAECE7}
+.feat-icon-wrap.green{background:#E1F5EE}
+.feat-icon-wrap.amber{background:#FAEEDA}
+.feat-icon-wrap.pink{background:#FBEAF0}
+.feat-icon-wrap.blue{background:#E6F1FB}
+.feat-icon-wrap.purple{background:#EEEDFE}
+.feat-label{font-size:11px;font-weight:700;color:#888780;margin-top:8px;text-align:center;white-space:nowrap}
+.feat-popup{position:absolute;bottom:calc(100% + 12px);left:50%;transform:translateX(-50%) scale(0.85);background:#2C2C2A;color:#fff;border-radius:14px;padding:.8rem 1rem;width:180px;pointer-events:none;opacity:0;transition:opacity .2s,transform .2s;z-index:100;text-align:left}
+.feat-popup::after{content:'';position:absolute;top:100%;left:50%;transform:translateX(-50%);border:6px solid transparent;border-top-color:#2C2C2A}
+.feat-item:hover .feat-popup{opacity:1;transform:translateX(-50%) scale(1)}
+.feat-popup strong{display:block;font-size:13px;font-weight:800;margin-bottom:4px;color:#fff}
+.feat-popup p{font-size:11px;color:rgba(255,255,255,.75);line-height:1.5;margin-bottom:6px}
+.feat-popup span{font-size:10px;font-weight:700;background:#D85A30;color:#fff;padding:3px 8px;border-radius:50px;display:inline-block}
+.feat-divider{width:1px;height:40px;background:#F0E8D8;flex-shrink:0}
 .live-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(240px,1fr));gap:1.2rem;margin-top:2rem}
 .live-card{background:#fff;border:1.5px solid #F0E8D8;border-radius:20px;overflow:hidden;transition:transform .2s;cursor:pointer;display:flex;flex-direction:column}
 .live-card:hover{transform:translateY(-4px)}
@@ -259,13 +265,41 @@ footer p{font-size:12px;line-height:1.7}
     <div class="section-label">What we offer</div>
     <h2 class="section-title">Everything your pet needs 🐾</h2>
     <p class="section-sub">From nutrition to socialising, PawConnect is your all-in-one companion for a happier, healthier pet life in Singapore.</p>
-    <div class="features-grid">
-      <div class="feature-card"><div class="feat-icon orange">🥗</div><h3>Nutrition Hub</h3><p>Personalised diet guides for your pet's breed and age.</p></div>
-      <div class="feature-card"><div class="feat-icon green">☕</div><h3>Cafe Finder</h3><p>Live pet-friendly cafes across Singapore.</p></div>
-      <div class="feature-card"><div class="feat-icon amber">📅</div><h3>Pet Events</h3><p>Real-time pet events and meetups near you.</p></div>
-      <div class="feature-card"><div class="feat-icon pink">✂️</div><h3>Grooming</h3><p>Book trusted groomers with live listings.</p></div>
-      <div class="feature-card"><div class="feat-icon blue">🏥</div><h3>Vet Directory</h3><p>Find trusted vets and book appointments.</p></div>
-      <div class="feature-card"><div class="feat-icon purple">☕</div><h3>Kopi AI</h3><p>Your Singlish AI pet assistant, anytime lah!</p></div>
+    <div class="features-hero">
+      <div class="feat-big orange" onclick="document.getElementById('cafes').scrollIntoView({behavior:'smooth'})">
+        <span class="feat-emoji">☕</span>
+        <h3>Pet-Friendly Cafe Finder</h3>
+        <p>Discover cafes across Singapore that welcome your furry best friends — with live reviews and ratings.</p>
+      </div>
+      <div class="features-side">
+        <div class="feat-big green" onclick="document.getElementById('nutrition').scrollIntoView({behavior:'smooth'})">
+          <span class="feat-emoji">🥗</span>
+          <h3>Nutrition Hub</h3>
+          <p>Personalised diet guides for every breed and age.</p>
+        </div>
+        <div class="feat-small-grid">
+          <div class="feat-small amber" onclick="document.getElementById('events').scrollIntoView({behavior:'smooth'})">
+            <span class="feat-emoji">📅</span>
+            <h3>Pet Events</h3>
+            <p>Real-time meetups & events near you.</p>
+          </div>
+          <div class="feat-small pink" onclick="document.getElementById('grooming').scrollIntoView({behavior:'smooth'})">
+            <span class="feat-emoji">✂️</span>
+            <h3>Grooming</h3>
+            <p>Book trusted groomers island-wide.</p>
+          </div>
+          <div class="feat-small blue" onclick="document.getElementById('vets').scrollIntoView({behavior:'smooth'})">
+            <span class="feat-emoji">🏥</span>
+            <h3>Vet Directory</h3>
+            <p>Find & book top-rated vets nearby.</p>
+          </div>
+          <div class="feat-small purple" onclick="document.getElementById('askmela').scrollIntoView({behavior:'smooth'})">
+            <span class="feat-emoji">☕</span>
+            <h3>Kopi AI</h3>
+            <p>Your Singlish AI pet kaki, 24/7 lah!</p>
+          </div>
+        </div>
+      </div>
     </div>
   </div>
 </section>
